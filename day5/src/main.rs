@@ -1,4 +1,4 @@
 fn main() {
-	let mut v = intcode::parse_from_std_io();
-	println!("{:?}", intcode::run(&mut v, &[5]));
+  let mut v = intcode::parse_from_std_io();
+  println!("{:?}", intcode::run(&mut v, &[5]));
 }

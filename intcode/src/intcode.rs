@@ -6,7 +6,7 @@ use std::convert::TryInto;
 const DEBUG: bool = false;
 
 fn digit(n: i64, i: usize) -> i64 {
-	(n / 10_i64.pow(i.try_into().unwrap())) % 10
+  (n / 10_i64.pow(i.try_into().unwrap())) % 10
 }
 
 fn ensure(mem: &mut Vec<i64>, i: usize) -> () {
@@ -140,173 +140,173 @@ pub fn run(mem: &mut Vec<i64>, input: &[i64]) -> Vec<i64> {
 }
 
 pub fn parse(s: &str) -> Vec<i64> {
-	let r = s.trim();
-	return r.split(",").map(|val| val.parse::<i64>().unwrap()).collect();
+  let r = s.trim();
+  return r.split(",").map(|val| val.parse::<i64>().unwrap()).collect();
 }
 
 pub fn parse_from_std_io() -> Vec<i64> {
-	let mut line = String::new();
+  let mut line = String::new();
 
-	let stdin = io::stdin();
-	stdin.read_line(&mut line).unwrap();
-	return parse(&line);
+  let stdin = io::stdin();
+  stdin.read_line(&mut line).unwrap();
+  return parse(&line);
 }
 
 #[cfg(test)]
 mod tests {
-	use crate::run;
+  use crate::run;
 
   #[test]
   fn ex_5_1() {
-  	let mut v = vec![1002,4,3,4,33];
-  	run(&mut v, &[]);
-  	assert_eq!(v[4], 99);
+    let mut v = vec![1002,4,3,4,33];
+    run(&mut v, &[]);
+    assert_eq!(v[4], 99);
   }
 
   #[test]
   fn ex_5_2() {
-  	let mut v = vec![1101,100,-1,4,0];
-  	run(&mut v, &[]);
-  	assert_eq!(v[4], 99);
+    let mut v = vec![1101,100,-1,4,0];
+    run(&mut v, &[]);
+    assert_eq!(v[4], 99);
   }
 
   #[test]
   fn ex_5_3() {
-  	let mut v = vec![3,0,4,0,99];
-  	let out = run(&mut v, &[78]);
-  	assert_eq!(out, [78]);
+    let mut v = vec![3,0,4,0,99];
+    let out = run(&mut v, &[78]);
+    assert_eq!(out, [78]);
   }
 
   #[test]
   fn ex_5_4() {
-  	let mut v = vec![3,9,8,9,10,9,4,9,99,-1,8];
-  	let out = run(&mut v, &[8]);
-  	assert_eq!(out, [1]);
+    let mut v = vec![3,9,8,9,10,9,4,9,99,-1,8];
+    let out = run(&mut v, &[8]);
+    assert_eq!(out, [1]);
   }
 
   #[test]
   fn ex_5_5() {
-  	let mut v = vec![3,9,8,9,10,9,4,9,99,-1,8];
-  	let out = run(&mut v, &[7]);
-  	assert_eq!(out, [0]);
+    let mut v = vec![3,9,8,9,10,9,4,9,99,-1,8];
+    let out = run(&mut v, &[7]);
+    assert_eq!(out, [0]);
   }
 
   #[test]
   fn ex_5_6() {
-  	let mut v = vec![3,9,7,9,10,9,4,9,99,-1,8];
-  	let out = run(&mut v, &[7]);
-  	assert_eq!(out, [1]);
+    let mut v = vec![3,9,7,9,10,9,4,9,99,-1,8];
+    let out = run(&mut v, &[7]);
+    assert_eq!(out, [1]);
   }
 
   #[test]
   fn ex_5_7() {
-  	let mut v = vec![3,9,7,9,10,9,4,9,99,-1,8];
-  	let out = run(&mut v, &[8]);
-  	assert_eq!(out, [0]);
+    let mut v = vec![3,9,7,9,10,9,4,9,99,-1,8];
+    let out = run(&mut v, &[8]);
+    assert_eq!(out, [0]);
   }
 
   #[test]
   fn ex_5_8() {
-  	let mut v = vec![3,9,7,9,10,9,4,9,99,-1,8];
-  	let out = run(&mut v, &[9]);
-  	assert_eq!(out, [0]);
+    let mut v = vec![3,9,7,9,10,9,4,9,99,-1,8];
+    let out = run(&mut v, &[9]);
+    assert_eq!(out, [0]);
   }
 
   #[test]
   fn ex_5_9() {
-  	let mut v = vec![3,3,1108,-1,8,3,4,3,99];
-  	let out = run(&mut v, &[8]);
-  	assert_eq!(out, [1]);
+    let mut v = vec![3,3,1108,-1,8,3,4,3,99];
+    let out = run(&mut v, &[8]);
+    assert_eq!(out, [1]);
   }
 
   #[test]
   fn ex_5_10() {
-  	let mut v = vec![3,3,1108,-1,8,3,4,3,99];
-  	let out = run(&mut v, &[7]);
-  	assert_eq!(out, [0]);
+    let mut v = vec![3,3,1108,-1,8,3,4,3,99];
+    let out = run(&mut v, &[7]);
+    assert_eq!(out, [0]);
   }
 
   #[test]
   fn ex_5_11() {
-  	let mut v = vec![3,3,1108,-1,8,3,4,3,99];
-  	let out = run(&mut v, &[9]);
-  	assert_eq!(out, [0]);
+    let mut v = vec![3,3,1108,-1,8,3,4,3,99];
+    let out = run(&mut v, &[9]);
+    assert_eq!(out, [0]);
   }
 
   #[test]
   fn ex_5_12() {
-  	let mut v = vec![3,3,1107,-1,8,3,4,3,99];
-  	let out = run(&mut v, &[7]);
-  	assert_eq!(out, [1]);
+    let mut v = vec![3,3,1107,-1,8,3,4,3,99];
+    let out = run(&mut v, &[7]);
+    assert_eq!(out, [1]);
   }
 
   #[test]
   fn ex_5_13() {
-  	let mut v = vec![3,3,1107,-1,8,3,4,3,99];
-  	let out = run(&mut v, &[8]);
-  	assert_eq!(out, [0]);
+    let mut v = vec![3,3,1107,-1,8,3,4,3,99];
+    let out = run(&mut v, &[8]);
+    assert_eq!(out, [0]);
   }
 
   #[test]
   fn ex_5_14() {
-  	let mut v = vec![3,3,1107,-1,8,3,4,3,99];
-  	let out = run(&mut v, &[9]);
-  	assert_eq!(out, [0]);
+    let mut v = vec![3,3,1107,-1,8,3,4,3,99];
+    let out = run(&mut v, &[9]);
+    assert_eq!(out, [0]);
   }
 
   #[test]
   fn ex_5_15() {
-  	let mut v = vec![3,12,6,12,15,1,13,14,13,4,13,99,-1,0,1,9];
-  	let out = run(&mut v, &[0]);
-  	assert_eq!(out, [0]);
+    let mut v = vec![3,12,6,12,15,1,13,14,13,4,13,99,-1,0,1,9];
+    let out = run(&mut v, &[0]);
+    assert_eq!(out, [0]);
   }
 
   #[test]
   fn ex_5_16() {
-  	let mut v = vec![3,12,6,12,15,1,13,14,13,4,13,99,-1,0,1,9];
-  	let out = run(&mut v, &[5]);
-  	assert_eq!(out, [1]);
+    let mut v = vec![3,12,6,12,15,1,13,14,13,4,13,99,-1,0,1,9];
+    let out = run(&mut v, &[5]);
+    assert_eq!(out, [1]);
   }
 
   #[test]
   fn ex_5_17() {
-  	let mut v = vec![3,3,1105,-1,9,1101,0,0,12,4,12,99,1];
-  	let out = run(&mut v, &[0]);
-  	assert_eq!(out, [0]);
+    let mut v = vec![3,3,1105,-1,9,1101,0,0,12,4,12,99,1];
+    let out = run(&mut v, &[0]);
+    assert_eq!(out, [0]);
   }
 
   #[test]
   fn ex_5_18() {
-  	let mut v = vec![3,3,1105,-1,9,1101,0,0,12,4,12,99,1];
-  	let out = run(&mut v, &[5]);
-  	assert_eq!(out, [1]);
+    let mut v = vec![3,3,1105,-1,9,1101,0,0,12,4,12,99,1];
+    let out = run(&mut v, &[5]);
+    assert_eq!(out, [1]);
   }
 
   #[test]
   fn ex_5_19() {
-  	let mut v = vec![3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,
-				1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,
-				999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99];
-		let out = run(&mut v, &[1]);
-		assert_eq!(out, [999]);
+    let mut v = vec![3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,
+        1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,
+        999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99];
+    let out = run(&mut v, &[1]);
+    assert_eq!(out, [999]);
   }
 
   #[test]
   fn ex_5_20() {
-  	let mut v = vec![3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,
-				1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,
-				999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99];
-		let out = run(&mut v, &[8]);
-		assert_eq!(out, [1000]);
+    let mut v = vec![3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,
+        1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,
+        999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99];
+    let out = run(&mut v, &[8]);
+    assert_eq!(out, [1000]);
   }
 
   #[test]
   fn ex_5_21() {
-  	let mut v = vec![3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,
-				1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,
-				999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99];
-		let out = run(&mut v, &[63]);
-		assert_eq!(out, [1001]);
+    let mut v = vec![3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,
+        1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,
+        999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99];
+    let out = run(&mut v, &[63]);
+    assert_eq!(out, [1001]);
   }
 
   #[test]
