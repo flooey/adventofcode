@@ -1,0 +1,5 @@
+   Compiling day13 v0.1.0 (/Users/flooey/Documents/code/adventofcode/day13)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.78s
+     Running `target/debug/day13`
+0,0,thread '<unnamed>' panicked at 'called `Result::unwrap()` on an `Err` value: "SendError(..)"', src/libcore/result.rs:1165:5
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace.
