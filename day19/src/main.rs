@@ -12,18 +12,23 @@ fn main() {
   f.read_to_string(&mut data).unwrap();
   let prog = intcode::parse(&data);
 
-  let mut tot = 0;
-  for x in 0..50 {
-    for y in 0..50 {
-      let l = lit(&prog, x, y);
-      tot += if l { 1 } else { 0 };
-      if l {
-        print!("#");
-      } else {
-        print!(".");
-      }
-    }
-    println!();
+  let mut x = 100;
+  let mut y = 110;
+  if !lit(&prog, x, y) {
+    println!("Didn't start lit");
+    return;
   }
-  println!("Total: {}", tot);
+  loop {
+    while lit(&prog, x, y) {
+      y += 1;
+    }
+    if lit(&prog, x + 99, y - 100) {
+      while lit(&prog, x + 99, y - 101) {
+        y -= 1;
+      }
+      println!("X: {}, y: {}", x, y - 100);
+      return;
+    }
+    x += 1;
+  }
 }
