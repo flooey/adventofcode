@@ -17,6 +17,10 @@
 (defun split-on-spaces (s)
   (remove-if (lambda (s) (equal "" s)) (uiop:split-string s :separator " ")))
 
+(defun flatten (ls)
+  (loop for outer in ls
+        nconcing (loop for inner in outer collecting inner)))
+
 (defun dprint (x)
   (print x)
   x)
