@@ -8,10 +8,10 @@
          )
     (mapcar f split)))
 
-(defun get-input (f)
+(defun get-input (&optional (f #'identity))
   (get-file f "input.txt"))
 
-(defun get-sample (f)
+(defun get-sample (&optional (f #'identity))
   (get-file f "sample.txt"))
 
 (defun split-on-spaces (s)
