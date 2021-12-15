@@ -24,3 +24,7 @@
 (defun dprint (x)
   (print x)
   x)
+
+(defun list-to-2d-array (l)
+  (make-array (list (length l) (length (first l)))
+              :initial-contents l))
