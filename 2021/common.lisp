@@ -1,5 +1,6 @@
 (load "~/.quicklisp/setup.lisp")
 (ql:quickload "uiop")
+(ql:quickload "cl-ppcre")
 
 (defun get-file (f fname)
   (let* ((input (uiop:read-file-string fname))
