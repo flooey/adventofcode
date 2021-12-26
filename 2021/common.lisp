@@ -29,3 +29,6 @@
 (defun list-to-2d-array (l)
   (make-array (list (length l) (length (first l)))
               :initial-contents l))
+
+(defun dump-hash (state)
+  (maphash (lambda (k v) (format t "~a: ~a~%" k v)) state))
