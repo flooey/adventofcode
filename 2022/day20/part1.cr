@@ -1,6 +1,6 @@
 class Node
-    @n = uninitialized Node
-    @p = uninitialized Node
+    @n : Node
+    @p : Node
     property n, p, value
 
     def initialize(@value : Int32)
