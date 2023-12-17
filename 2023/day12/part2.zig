@@ -39,6 +39,8 @@ fn bigFac(n: usize) !Managed {
     return result;
 }
 
+const debug = false;
+
 const MemoKey = struct {
     block: []u8,
     nums: []u8,
@@ -58,8 +60,6 @@ const MemoKeyContext = struct {
         return std.mem.eql(u8, a.block, b.block) and std.mem.eql(u8, a.nums, b.nums);
     }
 };
-
-const debug = false;
 
 var memos = std.HashMap(MemoKey, u128, MemoKeyContext, 80).init(al);
 
@@ -134,7 +134,45 @@ fn countOneBlock(block: []u8, nums: []u8) !u128 {
     return total;
 }
 
+const CountMemoKey = struct {
+    blocks: [][]u8,
+    nums: []u8,
+};
+
+const CountMemoKeyContext = struct {
+    pub fn hash(self: CountMemoKeyContext, key: CountMemoKey) u64 {
+        _ = self;
+        var h = std.hash.Wyhash.init(1);
+        for (key.blocks) |block| {
+            h.update(block);
+        }
+        h.update(key.nums);
+        return h.final();
+    }
+
+    pub fn eql(self: CountMemoKeyContext, a: CountMemoKey, b: CountMemoKey) bool {
+        _ = self;
+        if (a.blocks.len != b.blocks.len) {
+            return false;
+        }
+        var i: usize = 0;
+        while (i < a.blocks.len) : (i += 1) {
+            if (!std.mem.eql(u8, a.blocks[i], b.blocks[i])) {
+                return false;
+            }
+        }
+        return std.mem.eql(u8, a.nums, b.nums);
+    }
+};
+
+var countMemos = std.HashMap(CountMemoKey, u128, CountMemoKeyContext, 80).init(al);
+
 fn count(blocks: [][]u8, nums: []u8) !u128 {
+    const memoKey = .{ .blocks = blocks, .nums = nums };
+    if (countMemos.contains(memoKey)) {
+        if (debug) try std.io.getStdOut().writer().print("[memo] Count {d} {s} {any} = {d}\n", .{ blocks.len, nums, memos.get(memoKey).? });
+        return countMemos.get(memoKey).?;
+    }
     if (nums.len == 0) {
         for (blocks) |block| {
             if (std.mem.indexOf(u8, block, "#") != null) {
@@ -160,6 +198,7 @@ fn count(blocks: [][]u8, nums: []u8) !u128 {
         }
         total += x * try count(blocks[1..blocks.len], nums[i..nums.len]);
     }
+    try countMemos.put(memoKey, total);
     return total;
 }
 
