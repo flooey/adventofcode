@@ -17,25 +17,21 @@ const Hail = struct {
     vz: f128,
 };
 
-fn intersect(h1: Hail, h2: Hail) bool {
-    // std.io.getStdOut().writer().print("h1: {any}\nh2: {any}\n", .{ h1, h2 }) catch unreachable;
-    var cx = h1.vy * h2.vz - h1.vz * h2.vy;
-    var cy = h1.vz * h2.vx - h1.vx * h2.vz;
-    var cz = h1.vx * h2.vy - h1.vy * h2.vx;
-    // std.io.getStdOut().writer().print("cross: {any} {any} {any}\n", .{ cx, cy, cz }) catch unreachable;
-    var dot = cx * (h1.x - h2.x) + cy * (h1.y - h2.y) + cz * (h1.z - h2.z);
-    // std.io.getStdOut().writer().print("dot: {any}\n", .{dot}) catch unreachable;
-    if (std.math.approxEqAbs(f128, dot, 0, 0.01)) {
-        return true;
-    }
-    return false;
-}
-
 fn collide(h1: Hail, h2: Hail) bool {
     // std.io.getStdOut().writer().print("h1: {any}\nh2: {any}\n", .{ h1, h2 }) catch unreachable;
     var tx = (h1.x - h2.x) / (h2.vx - h1.vx);
     var ty = (h1.y - h2.y) / (h2.vy - h1.vy);
     var tz = (h1.z - h2.z) / (h2.vz - h1.vz);
+
+    if (h1.vx == h2.vx) {
+        return std.math.approxEqAbs(f128, ty, tz, 0.01);
+    }
+    if (h1.vy == h2.vy) {
+        return std.math.approxEqAbs(f128, tx, tz, 0.01);
+    }
+    if (h1.vz == h2.vz) {
+        return std.math.approxEqAbs(f128, tx, ty, 0.01);
+    }
 
     return std.math.approxEqAbs(f128, tx, ty, 0.01) and std.math.approxEqAbs(f128, tx, tz, 0.01);
 }
@@ -90,15 +86,9 @@ pub fn main() !void {
 
                 var i: usize = 2;
                 while (i < hail.len) : (i += 1) {
-                    if (!intersect(superHail, hail[i])) {
+                    if (!collide(superHail, hail[i])) {
                         continue :zloop;
                     }
-                }
-                // There are two solutions that intersect (vx, vy, vz negated),
-                // check that it actually collides with an arbitrary hail to
-                // make sure it's the right one
-                if (!collide(superHail, hail[4])) {
-                    continue :zloop;
                 }
                 // try std.io.getStdOut().writer().print("{any}\n", .{t1});
                 // try std.io.getStdOut().writer().print("{any}\n", .{superHail});
