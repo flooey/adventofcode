@@ -18,7 +18,7 @@ size_t process(string input, char toRemove) {
 }
 
 void main() {
-	auto input = readln();
+  auto input = readln();
   input.length--;
   size_t min = process(input, 'A');
   for (char c = 'B'; c <= 'Z'; c++) {

@@ -1,7 +1,7 @@
 import std.stdio;
 
 void main() {
-	auto input = readln();
+  auto input = readln();
   input.length--;
   string processed = "";
   foreach (c; input) {
