@@ -63,33 +63,42 @@ for i in 0..<points.len():
         let (p2, p2dir1, p2dir2, p2in) = points[j]
         let area = (abs(p1[0] - p2[0]) + 1) * (abs(p1[1] - p2[1]) + 1)
         if area > largest:
+            # echo "Considering ", p1, " ", p2
             # Check if it's valid
-            case p1in:
-            of North:
-                if p1[1] > p2[1]:
-                    continue
-            of South:
-                if p1[1] < p2[1]:
-                    continue
-            of East:
-                if p1[0] > p2[0]:
-                    continue
-            of West:
-                if p1[0] < p2[0]:
-                    continue
-            case p2in:
-            of North:
-                if p2[1] > p1[1]:
-                    continue
-            of South:
-                if p2[1] < p1[1]:
-                    continue
-            of East:
-                if p2[0] > p1[0]:
-                    continue
-            of West:
-                if p2[0] < p1[0]:
-                    continue
+            # case p1in:
+            # of North:
+            #     if p1[1] > p2[1]:
+            #         echo "Rejected: outside"
+            #         continue
+            # of South:
+            #     if p1[1] < p2[1]:
+            #         echo "Rejected: outside"
+            #         continue
+            # of East:
+            #     if p1[0] > p2[0]:
+            #         echo "Rejected: outside"
+            #         continue
+            # of West:
+            #     if p1[0] < p2[0]:
+            #         echo "Rejected: outside"
+            #         continue
+            # case p2in:
+            # of North:
+            #     if p2[1] > p1[1]:
+            #         echo "Rejected: outside"
+            #         continue
+            # of South:
+            #     if p2[1] < p1[1]:
+            #         echo "Rejected: outside"
+            #         continue
+            # of East:
+            #     if p2[0] > p1[0]:
+            #         echo "Rejected: outside"
+            #         continue
+            # of West:
+            #     if p2[0] < p1[0]:
+            #         echo "Rejected: outside"
+            #         continue
             let minx = min(p1[0], p2[0])
             let maxx = max(p1[0], p2[0])
             let miny = min(p1[1], p2[1])
@@ -102,22 +111,27 @@ for i in 0..<points.len():
 
                 # If another point falls inside the rectangle, it must not be filled
                 if minx < p[0] and p[0] < maxx and miny < p[1] and p[1] < maxy:
+                    # echo "Rejected: includes ", p
                     valid = false
                     break
                 if minx == p[0] and miny < p[1] and p[1] < maxy:
                     if pdir1 == East or pdir2 == East:
+                        # echo "Rejected: includes ", p
                         valid = false
                         break
                 if maxx == p[0] and miny < p[1] and p[1] < maxy:
                     if pdir1 == West or pdir2 == West:
+                        # echo "Rejected: includes ", p
                         valid = false
                         break
                 if minx < p[0] and p[0] < maxx and miny == p[1]:
                     if pdir1 == North or pdir2 == North:
+                        # echo "Rejected: includes ", p
                         valid = false
                         break
                 if minx < p[0] and p[0] < maxx and maxy == p[1]:
                     if pdir1 == South or pdir2 == South:
+                        # echo "Rejected: includes ", p
                         valid = false
                         break
 
@@ -127,17 +141,18 @@ for i in 0..<points.len():
                 if (p[0] < minx and maxx < nextp[0]) or (nextp[0] < minx and
                         maxx < p[0]):
                     if miny < p[1] and p[1] < maxy:
+                        # echo "Rejected: crossed by ", p, " and ", nextp
                         valid = false
                         break
                 if (p[1] < miny and maxy < nextp[1]) or (nextp[1] < miny and
                         maxy < p[1]):
                     if minx < p[0] and p[0] < maxx:
+                        # echo "Rejected: crossed by ", p, " and ", nextp
                         valid = false
                         break
 
             if valid:
                 largest = area
-                echo p1
-                echo p2
+                # echo "Improved: ", p1, " ", p2
 
 echo largest
